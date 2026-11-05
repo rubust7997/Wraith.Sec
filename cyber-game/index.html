@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0d1110">
+  <meta name="description" content="Take a five-decision cybersecurity awareness challenge. Spot suspicious requests, protect accounts and choose a safe response.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://rubust7997.github.io/Wraith.Sec/cyber-game/">
+  <meta property="og:title" content="Signal Check | Wraith Security">
+  <meta property="og:description" content="Could you protect a small business through five real-world security decisions? Play Signal Check and share your result.">
+  <meta property="og:image" content="https://rubust7997.github.io/Wraith.Sec/assets/wraith-security-logo.jpeg">
+  <meta name="twitter:card" content="summary">
+  <title>Signal Check | Wraith Security</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="../assets/wraith-security-logo.jpeg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="scanline" aria-hidden="true"></div>
+  <header class="topbar">
+    <a class="brand" href="../" aria-label="Wraith Security home">
+      <img src="../assets/wraith-security-logo.jpeg" alt="">
+      <span>WRAITH <b>SECURITY</b></span>
+    </a>
+    <div class="topbar-right">
+      <span class="edition"><span class="live-dot"></span><span data-en="AWARENESS TRAINING / LIVE SIMULATION" data-af="BEWUSMAKINGOPLEIDING / LEWENDE SIMULASIE">AWARENESS TRAINING / LIVE SIMULATION</span></span>
+      <button class="language-button" id="languageToggle" type="button" aria-label="Switch to Afrikaans">AF</button>
+    </div>
+  </header>
+
+  <main class="game-layout">
+    <section class="game-column" aria-labelledby="game-title">
+      <div class="game-heading">
+        <p class="eyebrow" data-en="FIELD EXERCISE 01 / THE SMALL BUSINESS SHIFT" data-af="VELDOEFENING 01 / DIE KLEINBESIGHEIDSKOF">FIELD EXERCISE 01 / THE SMALL BUSINESS SHIFT</p>
+        <h1 id="game-title"><span data-en="Signal" data-af="Sein">Signal</span> <em data-en="Check." data-af="Kontrole.">Check.</em></h1>
+        <p class="game-intro" data-en="Five moments. Five decisions. Keep a small team safer online by choosing what you would really do." data-af="Vyf oomblikke. Vyf besluite. Hou ’n klein span veiliger aanlyn deur te kies wat jy werklik sou doen.">Five moments. Five decisions. Keep a small team safer online by choosing what you would really do.</p>
+      </div>
+
+      <section class="playfield" id="playfield" aria-live="polite">
+        <div class="game-status">
+          <div class="progress-block">
+            <div class="progress-label"><span id="roundLabel">DECISION 01 / 05</span><span id="progressText">20% COMPLETE</span></div>
+            <div class="progress-track" role="progressbar" aria-label="Game progress" aria-valuemin="0" aria-valuemax="5" aria-valuenow="1" id="progressBar"><span id="progressFill"></span></div>
+          </div>
+          <div class="score-block"><span data-en="SHIFT SCORE" data-af="SKOFTELLING">SHIFT SCORE</span><strong id="scoreDisplay">000</strong></div>
+        </div>
+
+        <article class="scenario" id="scenarioPanel">
+          <div class="scenario-meta"><span class="scenario-day" id="scenarioDay">MON / 08:42</span><span class="category-tag" id="scenarioCategory">INBOX SECURITY</span></div>
+          <h2 id="scenarioTitle" tabindex="-1">The overdue invoice</h2>
+          <p class="scenario-copy" id="scenarioPrompt"></p>
+          <div class="evidence" id="scenarioEvidence" aria-label="Message details"></div>
+          <div class="choice-heading"><span data-en="WHAT'S YOUR MOVE?" data-af="WAT DOEN JY?">WHAT'S YOUR MOVE?</span><span data-en="CHOOSE ONE ACTION" data-af="KIES EEN AKSIE">CHOOSE ONE ACTION</span></div>
+          <div class="choices" id="choices" role="group" aria-label="Choose your response"></div>
+          <div class="feedback" id="feedback" hidden>
+            <div class="feedback-mark" id="feedbackMark" aria-hidden="true"></div>
+            <div class="feedback-content"><p class="feedback-result" id="feedbackResult"></p><p id="feedbackText"></p><p class="field-tip" id="fieldTip"></p></div>
+            <button class="button continue-button" id="continueButton" type="button"><span data-en="Next decision" data-af="Volgende besluit">Next decision</span><b aria-hidden="true">→</b></button>
+          </div>
+        </article>
+      </section>
+
+      <section class="results" id="results" hidden aria-live="polite">
+        <p class="eyebrow" data-en="SHIFT COMPLETE / DEBRIEF READY" data-af="SKOF VOLTOOI / ONTLEDING GEREED">SHIFT COMPLETE / DEBRIEF READY</p>
+        <div class="result-top"><div><p class="result-score-label" data-en="YOUR SIGNAL SCORE" data-af="JOU SEINTELLING">YOUR SIGNAL SCORE</p><p class="result-score"><span id="finalScore">0</span><small>/ 100</small></p></div><div class="result-rank" id="resultRank"></div></div>
+        <h2 id="resultTitle" tabindex="-1"></h2>
+        <p class="result-message" id="resultMessage"></p>
+        <div class="debrief" id="debrief"></div>
+        <div class="result-actions">
+          <button class="button" id="replayButton" type="button"><span data-en="Run it again" data-af="Speel weer">Run it again</span><b aria-hidden="true">↻</b></button>
+          <button class="button button-secondary" id="shareButton" type="button"><span data-en="Share on Facebook" data-af="Deel op Facebook">Share on Facebook</span><b aria-hidden="true">↗</b></button>
+          <button class="copy-button" id="copyButton" type="button" data-en="COPY GAME LINK" data-af="KOPIEER SPELSKAKEL">COPY GAME LINK</button>
+        </div>
+        <p class="share-status" id="shareStatus" role="status" aria-live="polite"></p>
+      </section>
+
+      <footer class="game-footer">
+        <span data-en="AWARENESS GAME · NO PERSONAL DATA COLLECTED" data-af="BEWUSMAKINGSPEL · GEEN PERSOONLIKE DATA WORD INGESAMEL NIE">AWARENESS GAME · NO PERSONAL DATA COLLECTED</span>
+        <a href="../" data-en="Wraith Security ↗" data-af="Wraith Security ↗">Wraith Security ↗</a>
+      </footer>
+    </section>
+
+    <aside class="briefing-rail" aria-label="Training notes">
+      <div class="rail-identity"><img src="../assets/wraith-security-logo.jpeg" alt="Wraith Security"><span data-en="SECURITY FIELD GUIDE" data-af="SEKURITEITSVELDGIDS">SECURITY FIELD GUIDE</span></div>
+      <div class="rail-rule"></div>
+      <p class="rail-index">NOTE 001 — 005</p>
+      <h2 data-en="Pause. Verify. Report." data-af="Wag. Bevestig. Rapporteer.">Pause. Verify. Report.</h2>
+      <p class="rail-copy" data-en="Most security incidents start with an ordinary-looking moment. A little healthy friction can protect accounts, money and customer trust." data-af="Die meeste sekuriteitsinsidente begin met ’n doodgewone oomblik. ’n Bietjie gesonde versigtigheid kan rekeninge, geld en kliëntevertroue beskerm.">Most security incidents start with an ordinary-looking moment. A little healthy friction can protect accounts, money and customer trust.</p>
+      <div class="principle-list">
+        <div><b>01</b><span data-en="Verify unexpected requests through a known, separate channel." data-af="Bevestig onverwagte versoeke deur ’n bekende, afsonderlike kanaal.">Verify unexpected requests through a known, separate channel.</span></div>
+        <div><b>02</b><span data-en="Never share passwords or one-time security codes." data-af="Moet nooit wagwoorde of eenmalige sekuriteitskodes deel nie.">Never share passwords or one-time security codes.</span></div>
+        <div><b>03</b><span data-en="Report quickly. Don't hide or delete evidence." data-af="Rapporteer gou. Moenie bewyse wegsteek of uitvee nie.">Report quickly. Don't hide or delete evidence.</span></div>
+      </div>
+      <p class="rail-footnote" data-en="TRAINING SCENARIOS / DEFENSIVE DECISIONS ONLY" data-af="OPLEIDINGSSCENARIO’S / SLEGS VERDEDIGENDE BESLUITE">TRAINING SCENARIOS / DEFENSIVE DECISIONS ONLY</p>
+    </aside>
+  </main>
+
+  <script src="game.js" defer></script>
+</body>
+</html>
