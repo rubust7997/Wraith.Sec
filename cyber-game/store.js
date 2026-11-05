@@ -2,9 +2,12 @@ const DAY_SECONDS = 60;
 const BASE_CASH = 1400;
 
 const products = [
-  { id: 'mug', name: { en: 'Stoneware mug', af: 'Steengoedbeker' }, category: { en: 'HOME GOODS', af: 'HUISWARE' }, price: 135, unitCost: 55, stock: 5, batch: 5, timer: 0, interval: 5, soldToday: 0, soldTotal: 0 },
-  { id: 'tote', name: { en: 'Canvas tote', af: 'Seiltassak' }, category: { en: 'ACCESSORIES', af: 'BYKOMSTIGHEDE' }, price: 195, unitCost: 75, stock: 4, batch: 4, timer: 0, interval: 8, soldToday: 0, soldTotal: 0 },
-  { id: 'planter', name: { en: 'Desk planter', af: 'Skriftafelplanter' }, category: { en: 'LIVING', af: 'LEWENDE GOEDERE' }, price: 295, unitCost: 110, stock: 3, batch: 3, timer: 0, interval: 12, soldToday: 0, soldTotal: 0 }
+  { id: 'mug', name: { en: 'Stoneware mug', af: 'Steengoedbeker' }, category: { en: 'HOME GOODS', af: 'HUISWARE' }, price: 135, unitCost: 55, stock: 5, startingStock: 5, batch: 5, timer: 0, interval: 5, soldToday: 0, soldTotal: 0 },
+  { id: 'tote', name: { en: 'Canvas tote', af: 'Seiltassak' }, category: { en: 'ACCESSORIES', af: 'BYKOMSTIGHEDE' }, price: 195, unitCost: 75, stock: 4, startingStock: 4, batch: 4, timer: 0, interval: 8, soldToday: 0, soldTotal: 0 },
+  { id: 'planter', name: { en: 'Desk planter', af: 'Skriftafelplanter' }, category: { en: 'LIVING', af: 'LEWENDE GOEDERE' }, price: 295, unitCost: 110, stock: 3, startingStock: 3, batch: 3, timer: 0, interval: 12, soldToday: 0, soldTotal: 0 },
+  { id: 'candle', name: { en: 'Scented candle', af: 'Geurkers' }, category: { en: 'HOME GOODS', af: 'HUISWARE' }, price: 225, unitCost: 90, stock: 4, startingStock: 4, batch: 4, timer: 0, interval: 9, soldToday: 0, soldTotal: 0 },
+  { id: 'journal', name: { en: 'Linen journal', af: 'Linnejoernaal' }, category: { en: 'STATIONERY', af: 'SKRYFBEHOEFTES' }, price: 165, unitCost: 60, stock: 4, startingStock: 4, batch: 4, timer: 0, interval: 7, soldToday: 0, soldTotal: 0 },
+  { id: 'lamp', name: { en: 'Arc desk lamp', af: 'Booglessenaarlamp' }, category: { en: 'LIGHTING', af: 'BELIGTING' }, price: 420, unitCost: 180, stock: 2, startingStock: 2, batch: 2, timer: 0, interval: 15, soldToday: 0, soldTotal: 0 }
 ];
 
 const incidents = [
@@ -149,7 +152,10 @@ function updateLanguage() {
   if (welcomeDialog.open) document.getElementById('businessNameInput').focus();
   if (dayDialog.open) renderDaySummary();
   if (incidentDialog.open && currentIncident) renderIncident(currentIncident);
-  if (phase === 'ended') renderFinalReport();
+  if (phase === 'ended') {
+    renderFinalReport();
+    renderSharePreview();
+  }
 }
 
 function renderInventory() {
@@ -537,6 +543,7 @@ function endBusiness(bankrupt = false) {
     ? (language === 'en' ? 'CASH FLOW COLLAPSED' : 'KONTANTVLOEI INEENGESTORT')
     : (language === 'en' ? `${day} DAYS IN BUSINESS` : `${day} DAE IN BESIGHEID`);
   renderFinalReport(bankrupt);
+  renderSharePreview();
   document.getElementById('shareStatus').textContent = '';
   document.getElementById('resultTitle').focus();
 }
@@ -608,7 +615,7 @@ function restartBusiness() {
   responseLog.length = 0;
   upgrades = { marketing: 0, mail: 0, account: 0, backup: 0, payment: 0 };
   products.forEach(product => {
-    product.stock = product.id === 'mug' ? 5 : product.id === 'tote' ? 4 : 3;
+    product.stock = product.startingStock;
     product.timer = 0;
     product.soldToday = 0;
     product.soldTotal = 0;
@@ -648,13 +655,38 @@ function updateMusicControl() {
 }
 
 function shareOnFacebook() {
-  const quote = language === 'en'
-    ? `${businessName} closed after ${day} days with ${money(cash)} left. Simulated cyber incidents cost the shop ${money(totalLosses)}. How would your business hold up?`
-    : `${businessName} het ná ${day} dae met ${money(cash)} oorgebly. Gesimuleerde kuberinsidente het die winkel ${money(totalLosses)} gekos. Hoe sou jou besigheid vaar?`;
+  const quote = createSharePost();
   const shareUrl = new URL('https://www.facebook.com/sharer/sharer.php');
   shareUrl.searchParams.set('u', 'https://rubust7997.github.io/Wraith.Sec/cyber-game/');
   shareUrl.searchParams.set('quote', quote);
   window.open(shareUrl.toString(), '_blank', 'noopener,noreferrer');
+}
+
+function createSharePost() {
+  if (language === 'en') {
+    return [
+      `🏪 ${businessName} · Storefront Under Pressure`,
+      `Days in business: ${day}`,
+      `Ending balance: ${money(cash)}`,
+      `Gross sales: ${money(grossSales)} across ${number(orders)} orders`,
+      `Stock purchases: ${money(stockCosts)} · Operating costs: ${money(operatingCosts)}`,
+      `Cyber incident losses: ${money(totalLosses)} · Customer trust: ${Math.round(trust)}%`,
+      'Could you keep your shop running?'
+    ].join('\n');
+  }
+  return [
+    `🏪 ${businessName} · Winkelvenster Onder Druk`,
+    `Dae in besigheid: ${day}`,
+    `Eindbalans: ${money(cash)}`,
+    `Bruto verkope: ${money(grossSales)} oor ${number(orders)} bestellings`,
+    `Voorraadaankope: ${money(stockCosts)} · Bedryfskoste: ${money(operatingCosts)}`,
+    `Kuberinsidentverliese: ${money(totalLosses)} · Kliëntevertroue: ${Math.round(trust)}%`,
+    'Kan jy jou winkel aan die gang hou?'
+  ].join('\n');
+}
+
+function renderSharePreview() {
+  document.getElementById('sharePreview').textContent = createSharePost();
 }
 
 async function copyGameLink() {
