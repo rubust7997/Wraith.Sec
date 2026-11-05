@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0A0A0C">
+  <meta name="description" content="Independent, authorized cybersecurity assessments for small businesses and private systems. Clear findings, practical fixes, and transparent South African pricing.">
+  <title>WRAITH SECURITY | Independent Ethical Hacking &amp; Vulnerability Testing</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            cyber: {
+              black: '#0A0A0C', darker: '#101216', card: '#161920', border: '#2A2F3D',
+              red: '#FF003C', redDark: '#B3002A', textMuted: '#94A3B8'
+            }
+          },
+          fontFamily: {
+            mono: ['JetBrains Mono', 'Courier New', 'monospace'],
+            sans: ['Inter', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body { background: #0A0A0C; color: #E2E8F0; font-family: 'Inter', sans-serif; }
+    .cyber-grid {
+      background-size: 40px 40px;
+      background-image: linear-gradient(to right, rgba(255,255,255,.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,.03) 1px, transparent 1px);
+    }
+    .glow-red { box-shadow: 0 0 25px rgba(255,0,60,.25); }
+    .glow-red-hover:hover { box-shadow: 0 0 30px rgba(255,0,60,.45); }
+    .text-glow { text-shadow: 0 0 10px rgba(255,0,60,.6); }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #0A0A0C; }
+    ::-webkit-scrollbar-thumb { background: #2A2F3D; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #FF003C; }
+  </style>
+</head>
+<body class="cyber-grid min-h-screen flex flex-col justify-between selection:bg-cyber-red selection:text-white">
+  <header class="sticky top-0 z-50 bg-cyber-black/90 backdrop-blur-md border-b border-cyber-border/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <a href="#home" class="flex items-center space-x-3 group" aria-label="Wraith Security home">
+        <div class="relative w-11 h-11 flex items-center justify-center bg-cyber-card rounded-lg border border-cyber-red/40 group-hover:border-cyber-red transition duration-300" aria-hidden="true">
+          <svg class="w-8 h-8 text-cyber-red filter drop-shadow-[0_0_8px_rgba(255,0,60,0.8)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="rgba(255,0,60,0.15)"/>
+            <path d="M12 8c-2.5 0-4.5 1.5-5 3.5 1.5 2 3.5 3 5 3s3.5-1 5-3c-.5-2-2.5-3.5-5-3.5z" stroke="#FFF" stroke-width="1.5"/>
+            <circle cx="12" cy="11.5" r="1.5" fill="#FF003C"/>
+          </svg>
+        </div>
+        <div>
+          <span class="text-xl font-extrabold tracking-wider text-white flex items-center font-mono">WRAITH<span class="text-cyber-red">.</span>SEC</span>
+          <span class="text-[10px] tracking-widest text-cyber-textMuted uppercase block -mt-1 font-mono">ETHICAL HACKING</span>
+        </div>
+      </a>
+      <nav class="hidden md:flex items-center space-x-8 text-sm font-medium font-mono text-gray-300" aria-label="Main navigation">
+        <a href="#services" class="hover:text-cyber-red transition-colors">/SERVICES &amp; PRICING</a>
+        <a href="#faq" class="hover:text-cyber-red transition-colors">/FAQ &amp; RULES</a>
+        <a href="#contact" class="hover:text-cyber-red transition-colors">/BOOK ASSESSMENT</a>
+      </nav>
+      <div class="hidden sm:flex items-center space-x-4">
+        <a href="mailto:wraith.r7.cyber@gmail.com" class="text-xs font-mono text-gray-400 hover:text-white flex items-center gap-2">
+          <i class="fa-regular fa-envelope text-cyber-red" aria-hidden="true"></i> wraith.r7.cyber@gmail.com
+        </a>
+        <a href="#contact" class="bg-cyber-red/10 border border-cyber-red text-cyber-red hover:bg-cyber-red hover:text-white font-mono text-xs font-bold px-4 py-2.5 rounded-md transition duration-300 glow-red-hover">ENGAGE TARGET</a>
+      </div>
+      <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-white focus:outline-none" type="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-menu">
+        <i class="fa-solid fa-bars text-2xl" aria-hidden="true"></i>
+      </button>
+    </div>
+    <nav id="mobile-menu" class="hidden md:hidden bg-cyber-darker border-b border-cyber-border px-4 py-4 space-y-3 font-mono text-sm" aria-label="Mobile navigation">
+      <a href="#services" class="block text-gray-300 hover:text-cyber-red py-2">/SERVICES &amp; PRICING</a>
+      <a href="#faq" class="block text-gray-300 hover:text-cyber-red py-2">/FAQ &amp; RULES</a>
+      <a href="#contact" class="block text-cyber-red font-bold py-2">/BOOK ASSESSMENT</a>
+      <a href="mailto:wraith.r7.cyber@gmail.com" class="block pt-2 border-t border-cyber-border text-xs text-gray-400">
+        <i class="fa-regular fa-envelope text-cyber-red me-1" aria-hidden="true"></i> wraith.r7.cyber@gmail.com
+      </a>
+    </nav>
+  </header>
+
+  <main id="home">
+    <section class="relative py-20 lg:py-32 overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="grid lg:grid-cols-12 gap-12 items-center">
+          <div class="lg:col-span-7 space-y-6 text-left">
+            <div class="inline-flex items-center space-x-2 bg-cyber-card/80 border border-cyber-red/30 px-3 py-1.5 rounded-full text-xs font-mono text-cyber-red">
+              <span class="w-2 h-2 rounded-full bg-cyber-red animate-pulse" aria-hidden="true"></span>
+              <span>INDEPENDENT CYBERSECURITY AUDITS</span>
+            </div>
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight">
+              UNCOVER VULNERABILITIES <br class="hidden sm:inline">
+              <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyber-red via-red-500 to-white text-glow">BEFORE HACKERS DO.</span>
+            </h1>
+            <p class="text-lg text-gray-300 max-w-2xl leading-relaxed">
+              High-value, authorized ethical hacking tailored for small businesses, local websites, domains, and private systems. Get actionable, real-world security testing starting at just <strong class="text-white font-semibold">R500 per website</strong>.
+            </p>
+            <div class="pt-2 grid grid-cols-2 sm:grid-cols-3 gap-4 text-xs font-mono text-gray-400">
+              <div class="flex items-center space-x-2"><i class="fa-solid fa-shield-halved text-cyber-red" aria-hidden="true"></i><span>100% Non-Destructive</span></div>
+              <div class="flex items-center space-x-2"><i class="fa-solid fa-file-contract text-cyber-red" aria-hidden="true"></i><span>Written Authorization</span></div>
+              <div class="flex items-center space-x-2"><i class="fa-solid fa-file-pdf text-cyber-red" aria-hidden="true"></i><span>Clear Actionable Reports</span></div>
+            </div>
+            <div class="pt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+              <a href="#services" class="bg-cyber-red hover:bg-cyber-redDark text-white font-bold font-mono px-8 py-4 rounded-lg shadow-lg text-center transition duration-300 glow-red">VIEW AUDIT PACKAGES</a>
+              <a href="#contact" class="bg-cyber-card hover:bg-cyber-border text-white border border-cyber-border font-mono px-8 py-4 rounded-lg text-center transition duration-300 flex items-center justify-center gap-2">
+                <i class="fa-regular fa-paper-plane text-cyber-red" aria-hidden="true"></i> Request Custom Quote
+              </a>
+            </div>
+          </div>
+          <div class="lg:col-span-5">
+            <div class="bg-cyber-card border border-cyber-border rounded-xl shadow-2xl overflow-hidden font-mono text-xs">
+              <div class="bg-cyber-darker px-4 py-3 border-b border-cyber-border flex items-center justify-between">
+                <div class="flex space-x-2" aria-hidden="true"><span class="w-3 h-3 rounded-full bg-red-500/80"></span><span class="w-3 h-3 rounded-full bg-yellow-500/80"></span><span class="w-3 h-3 rounded-full bg-green-500/80"></span></div>
+                <span class="text-gray-500 text-[11px]">wraith-audit-console v1.0</span>
+              </div>
+              <div class="p-5 space-y-3 text-gray-300 min-h-[300px]">
+                <p class="text-cyber-red">$ wraith-sec --target client-website.co.za --mode non-destructive</p>
+                <p class="text-gray-400">[+] Initializing OWASP Top 10 Security Scan...</p>
+                <p class="text-gray-400">[+] Checking SSL/TLS Configuration... <span class="text-yellow-400">WEAK CIPHERS</span></p>
+                <p class="text-gray-400">[+] Analyzing HTTP Security Headers... <span class="text-red-400 font-bold">MISSING CSP &amp; HSTS</span></p>
+                <p class="text-gray-400">[+] Testing Input Fields for SQLi &amp; XSS... <span class="text-cyber-red font-bold">FINDING REQUIRES REVIEW</span></p>
+                <p class="text-gray-400">[+] Verifying Subdomain Risks &amp; Mail Records...</p>
+                <div class="p-3 bg-cyber-darker rounded border border-cyber-red/30 my-2">
+                  <p class="text-white font-bold mb-1">SAMPLE AUDIT SUMMARY:</p>
+                  <p class="text-emerald-400">✓ Risk Level: To be confirmed</p>
+                  <p class="text-emerald-400">✓ Action Plan Prepared (PDF)</p>
+                </div>
+                <p class="text-cyber-red animate-pulse">$ ready for authorized assessment_</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="py-20 bg-cyber-darker/60 border-y border-cyber-border">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h2 class="text-xs font-mono font-bold text-cyber-red tracking-widest uppercase mb-2">// TRANSPARENT PACKAGES</h2>
+          <h3 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Security Audits Tailored to Your Budget</h3>
+          <p class="mt-4 text-gray-400">Cybersecurity shouldn't cost millions. Get direct, independent vulnerability audits with clear pricing in ZAR. No hidden fees.</p>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <article class="relative bg-cyber-card border-2 border-cyber-red/60 rounded-xl p-6 flex flex-col justify-between hover:border-cyber-red transition duration-300 shadow-lg glow-red">
+            <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-cyber-red text-white text-[10px] font-mono font-bold uppercase tracking-wider px-3 py-1 rounded-full">MOST POPULAR</div>
+            <div>
+              <div class="text-cyber-red font-mono text-xs font-bold mb-2">STARTER SECURITY</div>
+              <h4 class="text-xl font-bold text-white mb-2">Website Vulnerability Assessment</h4>
+              <p class="text-xs text-gray-400 mb-6">Essential security scan for small business websites, landing pages, and portfolio sites.</p>
+              <div class="mb-6 pb-6 border-b border-cyber-border"><span class="text-4xl font-extrabold text-white font-mono">R500</span><span class="text-xs text-gray-400 font-mono"> / per site</span></div>
+              <ul class="space-y-3 text-xs text-gray-300 font-mono mb-8">
+                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-cyber-red mt-0.5" aria-hidden="true"></i><span>OWASP Top 10 Risk Check</span></li>
+                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-cyber-red mt-0.5" aria-hidden="true"></i><span>Input Validation (XSS / SQLi)</span></li>
+                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-cyber-red mt-0.5" aria-hidden="true"></i><span>SSL/TLS Config Analysis</span></li>
+                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-cyber-red mt-0.5" aria-hidden="true"></i><span>Non-Destructive Manual Test</span></li>
+                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-cyber-red mt-0.5" aria-hidden="true"></i><span>PDF Written Findings &amp; Fix Guide</span></li>
+              </ul>
+            </div>
+            <a href="#contact" data-service="Website Vulnerability Assessment (R500)" class="package-link w-full bg-cyber-red hover:bg-cyber-redDark text-white font-mono text-xs font-bold py-3 rounded text-center transition duration-200">SELECT PACKAGE</a>
+          </article>
+          <article class="bg-cyber-card border border-cyber-border rounded-xl p-6 flex flex-col justify-between hover:border-gray-500 transition duration-300">
+            <div>
+              <div class="text-gray-400 font-mono text-xs font-bold mb-2">NETWORK &amp; MAIL</div>
+              <h4 class="text-xl font-bold text-white mb-2">Domain &amp; DNS Audit</h4>
+              <p class="text-xs text-gray-400 mb-6">Comprehensive audit of your domain, email security, and server footprint.</p>
+              <div class="mb-6 pb-6 border-b border-cyber-border"><span class="text-4xl font-extrabold text-white font-mono">R1,250</span><span class="text-xs text-gray-400 font-mono"> / per domain</span></div>
+              <ul class="space-y-3 text-xs text-gray-300 font-mono mb-8">
+                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-cyber-red mt-0.5" aria-hidden="true"></i><span>Email Spoof Check (SPF/DKIM/DMARC)</span></li>
+                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-cyber-red mt-0.5" aria-hidden="true"></i><span>DNS Misconfiguration Review</span></li>
+                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-cyber-red mt-0.5" aria-hidden="true"></i><span>Subdomain Takeover Risk Assessment</span></li>
+                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-cyber-red mt-0.5" aria-hidden="true"></i><span>Public Data &amp; Email Leak Scan</span></li>
+                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-cyber-red mt-0.5" aria-hidden="true"></i><span>Infrastructure Hardening Report</span></li>
+              </ul>
+            </div>
+            <a href="#contact" data-service="Domain &amp; Infrastructure Audit (R1,250)" class="package-link w-full bg-cyber-darker hover:bg-cyber-border text-white border border-cyber-border font-mono text-xs font-bold py-3 rounded text-center transition duration-200">SELECT PACKAGE</a>
+          </article>
+          <article class="bg-cyber-card border border-cyber-border rounded-xl p-6 flex flex-col justify-between hover:border-gray-500 transition duration-300">
+            <div>
+              <div class="text-gray-400 font-mono text-xs font-bold mb-2">DEVICE SECURITY</div>
+              <h4 class="text-xl font-bold text-white mb-2">Private PC / Endpoint Audit</h4>
+              <p class="text-xs text-gray-400 mb-6">Remote or local security check for personal or business workstations.</p>
+              <div class="mb-6 pb-6 border-b border-cyber-border"><span class="text-4xl font-extrabold text-white font-mono">R850</span><span class="text-xs text-gray-400 font-mono"> / per device</span></div>
+              <ul class="space-y-3 text-xs text-gray-300 font-mono mb-8">
+                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-cyber-red mt-0.5" aria-hidden="true"></i><span>OS Patch &amp; Vulnerability Analysis</span></li>
+                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-cyber-red mt-0.5" aria-hidden="true"></i><span>Open Port &amp; Running Service Audit</span></li>
+                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-cyber-red mt-0.5" aria-hidden="true"></i><span>Malware &amp; Spyware Exposure Check</span></li>
+                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-cyber-red mt-0.5" aria-hidden="true"></i><span>Firewall &amp; Anti-Virus Hardening</span></li>
+                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-cyber-red mt-0.5" aria-hidden="true"></i><span>Personalized Security Best-Practices</span></li>
+              </ul>
+            </div>
+            <a href="#contact" data-service="Private PC Security Audit (R850)" class="package-link w-full bg-cyber-darker hover:bg-cyber-border text-white border border-cyber-border font-mono text-xs font-bold py-3 rounded text-center transition duration-200">SELECT PACKAGE</a>
+          </article>
+          <article class="bg-cyber-card border border-cyber-border rounded-xl p-6 flex flex-col justify-between hover:border-gray-500 transition duration-300">
+            <div>
+              <div class="text-gray-400 font-mono text-xs font-bold mb-2">CUSTOM SCOPE</div>
+              <h4 class="text-xl font-bold text-white mb-2">Full Penetration Test</h4>
+              <p class="text-xs text-gray-400 mb-6">Tailored penetration testing for complex networks, web applications &amp; remediation.</p>
+              <div class="mb-6 pb-6 border-b border-cyber-border"><span class="text-3xl font-extrabold text-white font-mono">Custom Quote</span></div>
+              <ul class="space-y-3 text-xs text-gray-300 font-mono mb-8">
+                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-cyber-red mt-0.5" aria-hidden="true"></i><span>Full Web App &amp; API Pentesting</span></li>
+                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-cyber-red mt-0.5" aria-hidden="true"></i><span>Internal &amp; External Network Scans</span></li>
+                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-cyber-red mt-0.5" aria-hidden="true"></i><span>Hands-on Vulnerability Remediation</span></li>
+                <li class="flex items-start gap-2"><i class="fa-solid fa-check text-cyber-red mt-0.5" aria-hidden="true"></i><span>Re-Testing after Fixes Applied</span></li>
+              </ul>
+            </div>
+            <a href="#contact" data-service="Custom Enterprise Scope" class="package-link w-full bg-cyber-darker hover:bg-cyber-border text-white border border-cyber-border font-mono text-xs font-bold py-3 rounded text-center transition duration-200">REQUEST QUOTE</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="py-20 bg-cyber-black">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-xs font-mono font-bold text-cyber-red tracking-widest uppercase mb-2">// TRANSPARENCY &amp; FAQ</h2>
+          <h3 class="text-3xl font-extrabold text-white">How The Assessment Works</h3>
+          <p class="mt-3 text-gray-400 text-sm">Everything you need to know before authorizing a cybersecurity scan.</p>
+        </div>
+        <div class="space-y-4 font-sans">
+          <details class="bg-cyber-card border border-cyber-border rounded-lg overflow-hidden group">
+            <summary class="cursor-pointer list-none px-6 py-4 font-mono font-bold text-white flex justify-between items-center">1. What am I buying for R500?<i class="fa-solid fa-chevron-down text-cyber-red transition-transform group-open:rotate-180" aria-hidden="true"></i></summary>
+            <div class="px-6 pb-5 pt-1 text-gray-300 text-sm leading-relaxed border-t border-cyber-border/40">You are purchasing a defined, focused vulnerability assessment of your single designated website URL. This includes automated scanning supplemented with manual checks against common web security risks, culminating in a clear, written findings report with steps on how to secure your site.</div>
+          </details>
+          <details class="bg-cyber-card border border-cyber-border rounded-lg overflow-hidden group">
+            <summary class="cursor-pointer list-none px-6 py-4 font-mono font-bold text-white flex justify-between items-center">2. What gets tested during the check?<i class="fa-solid fa-chevron-down text-cyber-red transition-transform group-open:rotate-180" aria-hidden="true"></i></summary>
+            <div class="px-6 pb-5 pt-1 text-gray-300 text-sm leading-relaxed border-t border-cyber-border/40">We perform agreed security checks based on OWASP (Open Web Application Security Project) standards. Checks may include common web security risks, security headers, SSL/TLS configuration, software versions, and exposed sensitive directories, within the scope authorized in writing.</div>
+          </details>
+          <details class="bg-cyber-card border border-cyber-border rounded-lg overflow-hidden group">
+            <summary class="cursor-pointer list-none px-6 py-4 font-mono font-bold text-white flex justify-between items-center">3. Can you damage my website during testing?<i class="fa-solid fa-chevron-down text-cyber-red transition-transform group-open:rotate-180" aria-hidden="true"></i></summary>
+            <div class="px-6 pb-5 pt-1 text-gray-300 text-sm leading-relaxed border-t border-cyber-border/40"><strong class="text-white">Testing is planned to be non-destructive.</strong> Denial of Service testing, modifying production data, or actions likely to disrupt service are excluded unless separately agreed in writing with appropriate safeguards. No test can guarantee zero operational risk.</div>
+          </details>
+          <details class="bg-cyber-card border border-cyber-border rounded-lg overflow-hidden group">
+            <summary class="cursor-pointer list-none px-6 py-4 font-mono font-bold text-white flex justify-between items-center">4. Do I need to give permission?<i class="fa-solid fa-chevron-down text-cyber-red transition-transform group-open:rotate-180" aria-hidden="true"></i></summary>
+            <div class="px-6 pb-5 pt-1 text-gray-300 text-sm leading-relaxed border-t border-cyber-border/40"><strong class="text-white">Yes, written authorization is strictly required.</strong> Testing requires explicit consent from the legal owner or authorized representative. Before testing, a written scope and authorization must be agreed.</div>
+          </details>
+          <details class="bg-cyber-card border border-cyber-border rounded-lg overflow-hidden group">
+            <summary class="cursor-pointer list-none px-6 py-4 font-mono font-bold text-white flex justify-between items-center">5. What do I receive after the audit?<i class="fa-solid fa-chevron-down text-cyber-red transition-transform group-open:rotate-180" aria-hidden="true"></i></summary>
+            <div class="px-6 pb-5 pt-1 text-gray-300 text-sm leading-relaxed border-t border-cyber-border/40">You will receive a confidential report detailing:
+              <ul class="list-disc list-inside mt-2 space-y-1 text-xs font-mono text-gray-300">
+                <li>Executive summary for non-technical readers</li><li>Risk ratings and technical findings</li><li>Evidence appropriate to the authorized scope</li><li>Prioritized recommendations to address findings</li>
+              </ul>
+            </div>
+          </details>
+          <details class="bg-cyber-card border border-cyber-border rounded-lg overflow-hidden group">
+            <summary class="cursor-pointer list-none px-6 py-4 font-mono font-bold text-white flex justify-between items-center">6. Does the R500 price include fixing the issues?<i class="fa-solid fa-chevron-down text-cyber-red transition-transform group-open:rotate-180" aria-hidden="true"></i></summary>
+            <div class="px-6 pb-5 pt-1 text-gray-300 text-sm leading-relaxed border-t border-cyber-border/40">No. The R500 covers the agreed security assessment and report. Repairs or code changes are quoted separately depending on complexity and who implements the fixes.</div>
+          </details>
+          <details class="bg-cyber-card border border-cyber-border rounded-lg overflow-hidden group">
+            <summary class="cursor-pointer list-none px-6 py-4 font-mono font-bold text-white flex justify-between items-center">7. When do I pay for the audit?<i class="fa-solid fa-chevron-down text-cyber-red transition-transform group-open:rotate-180" aria-hidden="true"></i></summary>
+            <div class="px-6 pb-5 pt-1 text-gray-300 text-sm leading-relaxed border-t border-cyber-border/40">Payment terms are agreed before testing begins. The finalized findings report is provided after testing is complete and the agreed payment terms are met.</div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="py-20 bg-cyber-darker border-t border-cyber-border">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-12 gap-12">
+          <div class="lg:col-span-5 space-y-6">
+            <div>
+              <h2 class="text-xs font-mono font-bold text-cyber-red tracking-widest uppercase mb-2">// INITIATE ENGAGEMENT</h2>
+              <h3 class="text-3xl font-extrabold text-white">Secure Your Asset Today</h3>
+              <p class="mt-3 text-gray-400 text-sm">Ready to test your defenses? Send an inquiry or select a service package to get started.</p>
+            </div>
+            <div class="bg-cyber-card border border-cyber-border p-6 rounded-xl space-y-4">
+              <div class="flex items-center space-x-4">
+                <div class="w-12 h-12 rounded-lg bg-cyber-red/10 border border-cyber-red flex items-center justify-center text-cyber-red text-xl"><i class="fa-regular fa-envelope" aria-hidden="true"></i></div>
+                <div><span class="text-xs font-mono text-gray-400 uppercase block">DIRECT EMAIL</span><a href="mailto:wraith.r7.cyber@gmail.com" class="text-white font-mono text-sm sm:text-base hover:text-cyber-red font-bold">wraith.r7.cyber@gmail.com</a></div>
+              </div>
+              <div class="pt-4 border-t border-cyber-border text-xs text-gray-400 font-mono space-y-2">
+                <p><i class="fa-solid fa-clock text-cyber-red me-2" aria-hidden="true"></i><strong>Response Time:</strong> Within 12-24 hours</p>
+                <p><i class="fa-solid fa-globe text-cyber-red me-2" aria-hidden="true"></i><strong>Location:</strong> South Africa (Remote Global Scopes Available)</p>
+                <p><i class="fa-solid fa-user-shield text-cyber-red me-2" aria-hidden="true"></i><strong>Independent:</strong> Ethical &amp; Confidential</p>
+              </div>
+            </div>
+            <div class="bg-cyber-card/60 p-4 border border-cyber-border rounded-xl">
+              <p class="text-xs text-gray-400 font-mono"><i class="fa-solid fa-triangle-exclamation text-yellow-500 me-1" aria-hidden="true"></i><strong>Note:</strong> Testing begins only after target ownership is verified and written authorization is exchanged.</p>
+            </div>
+          </div>
+          <div class="lg:col-span-7 bg-cyber-card border border-cyber-border p-6 sm:p-8 rounded-xl shadow-xl">
+            <h4 class="text-xl font-bold font-mono text-white mb-6 flex items-center gap-2"><i class="fa-solid fa-terminal text-cyber-red" aria-hidden="true"></i> TARGET SCOPE FORM</h4>
+            <form id="auditForm" class="space-y-5 font-mono text-sm">
+              <div>
+                <label for="formService" class="block text-xs text-gray-400 mb-2">SELECT AUDIT SERVICE *</label>
+                <select id="formService" name="service" required class="w-full bg-cyber-darker border border-cyber-border rounded p-3 text-white focus:border-cyber-red focus:outline-none transition">
+                  <option value="Website Vulnerability Assessment (R500)">Website Vulnerability Assessment - R500</option>
+                  <option value="Domain &amp; Infrastructure Audit (R1,250)">Domain &amp; Infrastructure Audit - R1,250</option>
+                  <option value="Private PC Security Audit (R850)">Private PC Security Audit - R850</option>
+                  <option value="Custom Enterprise Scope">Custom Enterprise Scope (Quote)</option>
+                </select>
+              </div>
+              <div class="grid sm:grid-cols-2 gap-4">
+                <div><label for="formName" class="block text-xs text-gray-400 mb-2">YOUR NAME / COMPANY *</label><input type="text" id="formName" name="name" autocomplete="name" required placeholder="e.g. John Doe" class="w-full bg-cyber-darker border border-cyber-border rounded p-3 text-white focus:border-cyber-red focus:outline-none transition"></div>
+                <div><label for="formEmail" class="block text-xs text-gray-400 mb-2">YOUR EMAIL ADDRESS *</label><input type="email" id="formEmail" name="email" autocomplete="email" required placeholder="name@domain.co.za" class="w-full bg-cyber-darker border border-cyber-border rounded p-3 text-white focus:border-cyber-red focus:outline-none transition"></div>
+              </div>
+              <div><label for="formTarget" class="block text-xs text-gray-400 mb-2">TARGET DOMAIN / URL / SCOPE *</label><input type="text" id="formTarget" name="target" required placeholder="https://mywebsite.co.za or domain.com" class="w-full bg-cyber-darker border border-cyber-border rounded p-3 text-white focus:border-cyber-red focus:outline-none transition"></div>
+              <div><label for="formNotes" class="block text-xs text-gray-400 mb-2">ADDITIONAL DETAILS / CONCERNS</label><textarea id="formNotes" name="notes" rows="4" placeholder="Mention any specific concerns or requirements..." class="w-full bg-cyber-darker border border-cyber-border rounded p-3 text-white focus:border-cyber-red focus:outline-none transition"></textarea></div>
+              <button type="submit" class="w-full bg-cyber-red hover:bg-cyber-redDark text-white font-bold py-4 rounded transition duration-300 glow-red">SUBMIT SCOPE FOR ASSESSMENT</button>
+            </form>
+            <div id="statusMsg" class="hidden mt-4 p-4 rounded bg-emerald-900/40 border border-emerald-500 text-emerald-200 text-xs font-mono" role="status" aria-live="polite">Request prepared. Your email app should open; if it does not, send your details to <a class="underline" href="mailto:wraith.r7.cyber@gmail.com">wraith.r7.cyber@gmail.com</a>.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-cyber-black border-t border-cyber-border py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-gray-500">
+      <div class="flex items-center space-x-2"><span class="text-white font-bold">WRAITH SECURITY</span><span>© 2026. All rights reserved.</span></div>
+      <div>Ethical &amp; Authorized Security Audits Only.</div>
+      <div><a href="mailto:wraith.r7.cyber@gmail.com" class="hover:text-cyber-red">wraith.r7.cyber@gmail.com</a></div>
+    </div>
+  </footer>
+
+  <script>
+    const mobileButton = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    mobileButton.addEventListener('click', () => {
+      const isExpanded = mobileButton.getAttribute('aria-expanded') === 'true';
+      mobileButton.setAttribute('aria-expanded', String(!isExpanded));
+      mobileMenu.classList.toggle('hidden', isExpanded);
+    });
+
+    mobileMenu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        mobileButton.setAttribute('aria-expanded', 'false');
+        mobileMenu.classList.add('hidden');
+      });
+    });
+
+    document.querySelectorAll('.package-link').forEach((link) => {
+      link.addEventListener('click', () => {
+        document.getElementById('formService').value = link.dataset.service;
+      });
+    });
+
+    document.getElementById('auditForm').addEventListener('submit', (event) => {
+      event.preventDefault();
+      const service = document.getElementById('formService').value;
+      const name = document.getElementById('formName').value.trim();
+      const email = document.getElementById('formEmail').value.trim();
+      const target = document.getElementById('formTarget').value.trim();
+      const notes = document.getElementById('formNotes').value.trim();
+      const subject = encodeURIComponent(`[AUDIT REQUEST] ${service} - ${target}`);
+      const body = encodeURIComponent(
+        `Hello Wraith Security,\n\nI would like to request an audit with the following details:\n\n` +
+        `Selected Service: ${service}\nName/Company: ${name}\nContact Email: ${email}\n` +
+        `Target Domain/URL: ${target}\nAdditional Notes: ${notes}\n\n` +
+        `I confirm that I am authorized to request testing on this target.`
+      );
+      document.getElementById('statusMsg').classList.remove('hidden');
+      window.location.href = `mailto:wraith.r7.cyber@gmail.com?subject=${subject}&body=${body}`;
+    });
+  </script>
+</body>
+</html>
