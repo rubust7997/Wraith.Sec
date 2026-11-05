@@ -4,14 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0d1110">
-  <meta name="description" content="Take a five-decision cybersecurity awareness challenge. Spot suspicious requests, protect accounts and choose a safe response.">
+  <meta name="description" content="Run a small online shop through simulated cyber incidents. Grow sales, invest in security, and see the financial impact of business disruptions.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://rubust7997.github.io/Wraith.Sec/cyber-game/">
-  <meta property="og:title" content="Signal Check | Wraith Security">
-  <meta property="og:description" content="Could you protect a small business through five real-world security decisions? Play Signal Check and share your result.">
+  <meta property="og:title" content="Storefront Under Pressure | Wraith Security">
+  <meta property="og:description" content="Grow a small online store, handle incoming threat emails, and see how security incidents affect sales, cash flow, and customer trust.">
   <meta property="og:image" content="https://rubust7997.github.io/Wraith.Sec/assets/wraith-security-logo.jpeg">
   <meta name="twitter:card" content="summary">
-  <title>Signal Check | Wraith Security</title>
+  <title>Storefront Under Pressure | Wraith Security</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -26,7 +26,7 @@
       <span>WRAITH <b>SECURITY</b></span>
     </a>
     <div class="topbar-right">
-      <span class="edition"><span class="live-dot"></span><span data-en="AWARENESS TRAINING / LIVE SIMULATION" data-af="BEWUSMAKINGOPLEIDING / LEWENDE SIMULASIE">AWARENESS TRAINING / LIVE SIMULATION</span></span>
+      <span class="edition"><span class="live-dot"></span><span data-en="SMALL BUSINESS / LIVE SIMULATION" data-af="KLEINBESIGHEID / LEWENDE SIMULASIE">SMALL BUSINESS / LIVE SIMULATION</span></span>
       <button class="language-button" id="languageToggle" type="button" aria-label="Switch to Afrikaans">AF</button>
     </div>
   </header>
@@ -34,48 +34,77 @@
   <main class="game-layout">
     <section class="game-column" aria-labelledby="game-title">
       <div class="game-heading">
-        <p class="eyebrow" data-en="FIELD EXERCISE 01 / THE SMALL BUSINESS SHIFT" data-af="VELDOEFENING 01 / DIE KLEINBESIGHEIDSKOF">FIELD EXERCISE 01 / THE SMALL BUSINESS SHIFT</p>
-        <h1 id="game-title"><span data-en="Signal" data-af="Sein">Signal</span> <em data-en="Check." data-af="Kontrole.">Check.</em></h1>
-        <p class="game-intro" data-en="Five moments. Five decisions. Keep a small team safer online by choosing what you would really do." data-af="Vyf oomblikke. Vyf besluite. Hou ’n klein span veiliger aanlyn deur te kies wat jy werklik sou doen.">Five moments. Five decisions. Keep a small team safer online by choosing what you would really do.</p>
+        <p class="eyebrow" data-en="STORE SIMULATION / SECURITY INCIDENTS INCOMING" data-af="WINKELSIMULASIE / SEKURITEITSINSIDENTE KOM IN">STORE SIMULATION / SECURITY INCIDENTS INCOMING</p>
+        <h1 id="game-title"><span data-en="Storefront" data-af="Winkelvenster">Storefront</span> <em data-en="Under Pressure." data-af="Onder Druk.">Under Pressure.</em></h1>
+        <p class="game-intro" data-en="Grow your online shop. Sales tick in automatically. Simulated security incidents hit your cash flow, orders, and customer trust. How long can your business hold up?" data-af="Bou jou aanlynwinkel. Verkope kom outomaties in. Gesimuleerde sekuriteitsinsidente raak jou kontantvloei, bestellings en kliëntevertroue. Hoe lank hou jou besigheid stand?">Grow your online shop. Sales tick in automatically. Simulated security incidents hit your cash flow, orders, and customer trust. How long can your business hold up?</p>
       </div>
 
-      <section class="playfield" id="playfield" aria-live="polite">
+      <section class="playfield tycoon-playfield" id="playfield">
         <div class="game-status">
-          <div class="progress-block">
-            <div class="progress-label"><span id="roundLabel">DECISION 01 / 05</span><span id="progressText">20% COMPLETE</span></div>
-            <div class="progress-track" role="progressbar" aria-label="Game progress" aria-valuemin="0" aria-valuemax="5" aria-valuenow="1" id="progressBar"><span id="progressFill"></span></div>
+          <div class="metrics-grid">
+            <div class="metric"><span data-en="CASH BALANCE" data-af="KONTANTBALANS">CASH BALANCE</span><strong id="cashBalance">R 850</strong></div>
+            <div class="metric"><span data-en="SALES / SEC" data-af="VERKOPE / SEK">SALES / SEC</span><strong id="salesRate">R 8</strong></div>
+            <div class="metric"><span data-en="CUSTOMER TRUST" data-af="KLIËNT vertroue">CUSTOMER TRUST</span><strong id="trustValue">100%</strong></div>
+            <div class="metric metric-clock"><span data-en="STORE OPEN" data-af="WINKEL OOP">STORE OPEN</span><strong id="dayTimer">00:00</strong></div>
           </div>
-          <div class="score-block"><span data-en="SHIFT SCORE" data-af="SKOFTELLING">SHIFT SCORE</span><strong id="scoreDisplay">000</strong></div>
         </div>
 
-        <article class="scenario" id="scenarioPanel">
-          <div class="scenario-meta"><span class="scenario-day" id="scenarioDay">MON / 08:42</span><span class="category-tag" id="scenarioCategory">INBOX SECURITY</span></div>
-          <h2 id="scenarioTitle" tabindex="-1">The overdue invoice</h2>
-          <p class="scenario-copy" id="scenarioPrompt"></p>
-          <div class="evidence" id="scenarioEvidence" aria-label="Message details"></div>
-          <div class="choice-heading"><span data-en="WHAT'S YOUR MOVE?" data-af="WAT DOEN JY?">WHAT'S YOUR MOVE?</span><span data-en="CHOOSE ONE ACTION" data-af="KIES EEN AKSIE">CHOOSE ONE ACTION</span></div>
-          <div class="choices" id="choices" role="group" aria-label="Choose your response"></div>
-          <div class="feedback" id="feedback" hidden>
-            <div class="feedback-mark" id="feedbackMark" aria-hidden="true"></div>
-            <div class="feedback-content"><p class="feedback-result" id="feedbackResult"></p><p id="feedbackText"></p><p class="field-tip" id="fieldTip"></p></div>
-            <button class="button continue-button" id="continueButton" type="button"><span data-en="Next decision" data-af="Volgende besluit">Next decision</span><b aria-hidden="true">→</b></button>
+        <div class="tycoon-grid">
+          <div class="store-column">
+            <section class="store-panel storefront-panel" aria-labelledby="storeTitle">
+              <div class="panel-heading"><div><p class="panel-kicker" data-en="YOUR BUSINESS" data-af="JOU BESIGHEID">YOUR BUSINESS</p><h2 id="storeTitle" data-en="Moss &amp; Mirth Supply" data-af="Moss &amp; Mirth Voorraad">Moss &amp; Mirth Supply</h2></div><span class="live-status"><i></i><span id="storeState">OPEN</span></span></div>
+              <div class="store-numbers"><div><span data-en="ORDERS TODAY" data-af="BESTELLINGS VANDAG">ORDERS TODAY</span><strong id="orderCount">0</strong></div><div><span data-en="GROSS SALES" data-af="BRUTO VERKOPE">GROSS SALES</span><strong id="grossSales">R 0</strong></div><div><span data-en="SERVICE STATUS" data-af="DIENSSTATUS">SERVICE STATUS</span><strong id="serviceStatus">ONLINE</strong></div></div>
+              <div class="sales-track" aria-label="Store sales activity"><span id="salesPulse"></span></div>
+              <p class="store-caption" id="storeCaption" data-en="The store is open. Incoming orders add to your balance over time." data-af="Die winkel is oop. Inkomende bestellings verhoog jou balans mettertyd.">The store is open. Incoming orders add to your balance over time.</p>
+            </section>
+
+            <section class="store-panel inbox-panel" aria-labelledby="inboxTitle">
+              <div class="panel-heading inbox-heading"><div><p class="panel-kicker" data-en="INCOMING MAIL" data-af="INKOMENDE POS">INCOMING MAIL</p><h2 id="inboxTitle" data-en="Business inbox" data-af="Besigheidsposbus">Business inbox</h2></div><span class="mail-count" id="mailCount">1</span></div>
+              <div class="mail-feed" id="mailFeed" aria-live="polite"><div class="mail-empty"><span class="mail-icon">↗</span><div><strong data-en="A new order just arrived" data-af="’n Nuwe bestelling het pas aangekom">A new order just arrived</strong><small data-en="orders@mossandmirth.shop · ORDER CONFIRMATION" data-af="orders@mossandmirth.shop · BESTELLINGSBEVESTIGING">orders@mossandmirth.shop · ORDER CONFIRMATION</small></div><time>NOW</time></div></div>
+            </section>
           </div>
-        </article>
+
+          <section class="store-panel upgrades-panel" aria-labelledby="upgradesTitle">
+            <div class="panel-heading"><div><p class="panel-kicker" data-en="BUSINESS INVESTMENTS" data-af="BESIGHEIDSBELEGGINGS">BUSINESS INVESTMENTS</p><h2 id="upgradesTitle" data-en="Store upgrades" data-af="Winkelopgraderings">Store upgrades</h2></div><span class="upgrade-count" id="upgradeCount">0 / 5</span></div>
+            <div class="upgrade-list">
+              <article class="upgrade-item"><span class="upgrade-symbol">↗</span><div class="upgrade-copy"><h3 data-en="Outreach campaign" data-af="Uitreikveldtog">Outreach campaign</h3><p data-en="More visits and faster sales, with more customers to look after." data-af="Meer besoeke en vinniger verkope, met meer kliënte om te bedien.">More visits and faster sales, with more customers to look after.</p><span class="upgrade-effect" data-en="+R 4 / SEC · MAX 3" data-af="+R 4 / SEK · MAKS 3">+R 4 / SEC · MAX 3</span><span class="upgrade-owned" id="marketingLevel"></span></div><button class="upgrade-buy" id="marketingUpgrade" type="button"><span>R 180</span><b>+</b></button></article>
+              <article class="upgrade-item"><span class="upgrade-symbol">✉</span><div class="upgrade-copy"><h3 data-en="Mail screening" data-af="Posfiltrering">Mail screening</h3><p data-en="Limits the simulated cost of supplier and invoice incidents." data-af="Beperk die gesimuleerde koste van verskaffer- en faktuurinsidente.">Limits the simulated cost of supplier and invoice incidents.</p><span class="upgrade-effect" data-en="INVOICE IMPACT ↓" data-af="FAKTUURIMPAK ↓">INVOICE IMPACT ↓</span><span class="upgrade-owned" id="mailLevel"></span></div><button class="upgrade-buy" id="mailUpgrade" type="button"><span>R 240</span><b>+</b></button></article>
+              <article class="upgrade-item"><span class="upgrade-symbol">◈</span><div class="upgrade-copy"><h3 data-en="Account controls" data-af="Rekeningbeheer">Account controls</h3><p data-en="Reduces the simulated business impact of an account takeover." data-af="Verminder die gesimuleerde besigheidsimpak van ’n rekeningoorname.">Reduces the simulated business impact of an account takeover.</p><span class="upgrade-effect" data-en="ACCOUNT IMPACT ↓" data-af="REKENINGIMPAK ↓">ACCOUNT IMPACT ↓</span><span class="upgrade-owned" id="accountLevel"></span></div><button class="upgrade-buy" id="accountUpgrade" type="button"><span>R 320</span><b>+</b></button></article>
+              <article class="upgrade-item"><span class="upgrade-symbol">▤</span><div class="upgrade-copy"><h3 data-en="Recovery reserve" data-af="Herstelreserwe">Recovery reserve</h3><p data-en="Shortens the simulated interruption after a store outage." data-af="Verkort die gesimuleerde onderbreking ná ’n winkelonderbreking.">Shortens the simulated interruption after a store outage.</p><span class="upgrade-effect" data-en="OUTAGE COST ↓" data-af="ONDERBREKINGSKOSTE ↓">OUTAGE COST ↓</span><span class="upgrade-owned" id="backupLevel"></span></div><button class="upgrade-buy" id="backupUpgrade" type="button"><span>R 280</span><b>+</b></button></article>
+              <article class="upgrade-item"><span class="upgrade-symbol">◎</span><div class="upgrade-copy"><h3 data-en="Payment monitoring" data-af="Betalingsmonitering">Payment monitoring</h3><p data-en="Limits simulated losses from suspicious checkout activity." data-af="Beperk gesimuleerde verliese weens verdagte betaalaktiwiteit.">Limits simulated losses from suspicious checkout activity.</p><span class="upgrade-effect" data-en="PAYMENT IMPACT ↓" data-af="BETALINGSIMPAK ↓">PAYMENT IMPACT ↓</span><span class="upgrade-owned" id="paymentLevel"></span></div><button class="upgrade-buy" id="paymentUpgrade" type="button"><span>R 360</span><b>+</b></button></article>
+            </div>
+            <p class="investment-note" data-en="In this simulation, upgrades change the size of some losses. They don't make a business risk-free." data-af="In hierdie simulasie verander opgraderings die grootte van sommige verliese. Dit maak ’n besigheid nie risikovry nie.">In this simulation, upgrades change the size of some losses. They don't make a business risk-free.</p>
+          </section>
+        </div>
+        <div class="game-controls"><span id="gameStatus" role="status" aria-live="polite" data-en="Sales are running. Incoming incidents are simulated." data-af="Verkope loop. Inkomende insidente is gesimuleer.">Sales are running. Incoming incidents are simulated.</span><button class="end-shift" id="endShiftButton" type="button" data-en="Close the books" data-af="Sluit die boeke">Close the books</button></div>
       </section>
 
       <section class="results" id="results" hidden aria-live="polite">
-        <p class="eyebrow" data-en="SHIFT COMPLETE / DEBRIEF READY" data-af="SKOF VOLTOOI / ONTLEDING GEREED">SHIFT COMPLETE / DEBRIEF READY</p>
-        <div class="result-top"><div><p class="result-score-label" data-en="YOUR SIGNAL SCORE" data-af="JOU SEINTELLING">YOUR SIGNAL SCORE</p><p class="result-score"><span id="finalScore">0</span><small>/ 100</small></p></div><div class="result-rank" id="resultRank"></div></div>
-        <h2 id="resultTitle" tabindex="-1"></h2>
+        <p class="eyebrow" data-en="STORE CLOSED / SIMULATION REPORT" data-af="WINKEL GESLUIT / SIMULASIEVERSLAG">STORE CLOSED / SIMULATION REPORT</p>
+        <div class="result-top"><div><p class="result-score-label" data-en="ENDING BALANCE" data-af="EINDBALANS">ENDING BALANCE</p><p class="result-score"><span id="finalBalance">R 0</span></p></div><div class="result-rank" id="businessStatus"></div></div>
+        <h2 id="resultTitle" tabindex="-1" data-en="Your business, under pressure." data-af="Jou besigheid, onder druk.">Your business, under pressure.</h2>
         <p class="result-message" id="resultMessage"></p>
-        <div class="debrief" id="debrief"></div>
+        <div class="report-grid"><div><span data-en="GROSS SALES" data-af="BRUTO VERKOPE">GROSS SALES</span><strong id="finalSales">R 0</strong></div><div><span data-en="INCIDENT LOSSES" data-af="INSIDENTVERLIESE">INCIDENT LOSSES</span><strong id="finalLosses">R 0</strong></div><div><span data-en="CUSTOMER TRUST" data-af="KLIËNTVERTROUE">CUSTOMER TRUST</span><strong id="finalTrust">100%</strong></div><div><span data-en="ORDERS COMPLETED" data-af="BESTELLINGS VOLTOOI">ORDERS COMPLETED</span><strong id="finalOrders">0</strong></div></div>
+        <div class="debrief" id="incidentReport"></div>
+        <div class="wraith-pitch"><p class="panel-kicker" data-en="FICTIONAL SIMULATION. REAL BUSINESSES FACE REAL COSTS." data-af="FIKTIEWE SIMULASIE. REGTE BESIGHEDE HET REGTE KOSTES.">FICTIONAL SIMULATION. REAL BUSINESSES FACE REAL COSTS.</p><h3 data-en="Don't guess where your exposure is." data-af="Moenie raai waar jou blootstelling lê nie.">Don't guess where your exposure is.</h3><p data-en="Wraith Security offers independent, authorised security assessments for websites and small businesses." data-af="Wraith Security bied onafhanklike, gemagtigde sekuriteitsassesserings vir webwerwe en klein besighede.">Wraith Security offers independent, authorised security assessments for websites and small businesses.</p><a class="button" href="mailto:wraith.r7.cyber@gmail.com?subject=Website%20security%20assessment%20enquiry"><span data-en="Ask Wraith Security" data-af="Vra Wraith Security">Ask Wraith Security</span><b aria-hidden="true">↗</b></a></div>
         <div class="result-actions">
-          <button class="button" id="replayButton" type="button"><span data-en="Run it again" data-af="Speel weer">Run it again</span><b aria-hidden="true">↻</b></button>
+          <button class="button" id="replayButton" type="button"><span data-en="Open another shop" data-af="Begin ’n nuwe winkel">Open another shop</span><b aria-hidden="true">↻</b></button>
           <button class="button button-secondary" id="shareButton" type="button"><span data-en="Share on Facebook" data-af="Deel op Facebook">Share on Facebook</span><b aria-hidden="true">↗</b></button>
           <button class="copy-button" id="copyButton" type="button" data-en="COPY GAME LINK" data-af="KOPIEER SPELSKAKEL">COPY GAME LINK</button>
         </div>
         <p class="share-status" id="shareStatus" role="status" aria-live="polite"></p>
       </section>
+
+      <dialog class="incident-dialog" id="incidentDialog" aria-labelledby="incidentTitle">
+        <div class="incident-topline"><span class="incident-pulse"></span><span data-en="INCOMING EMAIL / BUSINESS INCIDENT" data-af="INKOMENDE E-POS / BESIGHEIDSINSIDENT">INCOMING EMAIL / BUSINESS INCIDENT</span><span id="incidentTime">00:00</span></div>
+        <div class="incident-email"><span data-en="FROM" data-af="VAN">FROM</span><strong id="incidentSender"></strong><span data-en="SUBJECT" data-af="ONDERWERP">SUBJECT</span><strong id="incidentSubject"></strong></div>
+        <p class="panel-kicker" id="incidentType"></p>
+        <h2 id="incidentTitle"></h2>
+        <p class="incident-story" id="incidentStory"></p>
+        <div class="incident-impact"><div><span data-en="CASH LOST" data-af="KONTANT VERLOOR">CASH LOST</span><strong id="incidentCashImpact">R 0</strong></div><div><span data-en="TRUST CHANGE" data-af="VERTROUEVERANDERING">TRUST CHANGE</span><strong id="incidentTrustImpact">-0%</strong></div><div><span data-en="STORE STATUS" data-af="WINKELSTATUS">STORE STATUS</span><strong id="incidentStoreImpact">OPEN</strong></div></div>
+        <p class="incident-explainer" id="incidentExplainer"></p>
+        <button class="button incident-close" id="incidentContinue" type="button"><span data-en="Back to the store" data-af="Terug na die winkel">Back to the store</span><b aria-hidden="true">→</b></button>
+      </dialog>
 
       <footer class="game-footer">
         <span data-en="AWARENESS GAME · NO PERSONAL DATA COLLECTED" data-af="BEWUSMAKINGSPEL · GEEN PERSOONLIKE DATA WORD INGESAMEL NIE">AWARENESS GAME · NO PERSONAL DATA COLLECTED</span>
@@ -84,20 +113,21 @@
     </section>
 
     <aside class="briefing-rail" aria-label="Training notes">
-      <div class="rail-identity"><img src="../assets/wraith-security-logo.jpeg" alt="Wraith Security"><span data-en="SECURITY FIELD GUIDE" data-af="SEKURITEITSVELDGIDS">SECURITY FIELD GUIDE</span></div>
+      <div class="rail-identity"><img src="../assets/wraith-security-logo.jpeg" alt="Wraith Security"><span data-en="WRAITH SECURITY / BUSINESS RISK" data-af="WRAITH SECURITY / BESIGHEIDSRISIKO">WRAITH SECURITY / BUSINESS RISK</span></div>
       <div class="rail-rule"></div>
-      <p class="rail-index">NOTE 001 — 005</p>
-      <h2 data-en="Pause. Verify. Report." data-af="Wag. Bevestig. Rapporteer.">Pause. Verify. Report.</h2>
-      <p class="rail-copy" data-en="Most security incidents start with an ordinary-looking moment. A little healthy friction can protect accounts, money and customer trust." data-af="Die meeste sekuriteitsinsidente begin met ’n doodgewone oomblik. ’n Bietjie gesonde versigtigheid kan rekeninge, geld en kliëntevertroue beskerm.">Most security incidents start with an ordinary-looking moment. A little healthy friction can protect accounts, money and customer trust.</p>
+      <p class="rail-index" data-en="A SMALL BUSINESS / A BIG ONLINE FOOTPRINT" data-af="’N KLEIN BESIGHEID / ’N GROOT AANLYN VOETSPOOR">A SMALL BUSINESS / A BIG ONLINE FOOTPRINT</p>
+      <h2 data-en="Revenue up. Exposure up." data-af="Inkomste op. Blootstelling op.">Revenue up. Exposure up.</h2>
+      <p class="rail-copy" data-en="Every order helps the shop grow. More customers also mean more to lose when an incident affects payments, accounts or store availability." data-af="Elke bestelling help die winkel groei. Meer kliënte beteken ook meer om te verloor wanneer ’n insident betalings, rekeninge of winkelbeskikbaarheid raak.">Every order helps the shop grow. More customers also mean more to lose when an incident affects payments, accounts or store availability.</p>
       <div class="principle-list">
-        <div><b>01</b><span data-en="Verify unexpected requests through a known, separate channel." data-af="Bevestig onverwagte versoeke deur ’n bekende, afsonderlike kanaal.">Verify unexpected requests through a known, separate channel.</span></div>
-        <div><b>02</b><span data-en="Never share passwords or one-time security codes." data-af="Moet nooit wagwoorde of eenmalige sekuriteitskodes deel nie.">Never share passwords or one-time security codes.</span></div>
-        <div><b>03</b><span data-en="Report quickly. Don't hide or delete evidence." data-af="Rapporteer gou. Moenie bewyse wegsteek of uitvee nie.">Report quickly. Don't hide or delete evidence.</span></div>
+        <div><b>01</b><span data-en="Fake supplier requests can redirect payments." data-af="Vals verskafferversoeke kan betalings herlei.">Fake supplier requests can redirect payments.</span></div>
+        <div><b>02</b><span data-en="A compromised account can interrupt orders and access." data-af="’n Gekompromitteerde rekening kan bestellings en toegang onderbreek.">A compromised account can interrupt orders and access.</span></div>
+        <div><b>03</b><span data-en="Store downtime can cost sales and customer confidence." data-af="Winkelstilstand kan verkope en kliëntevertroue kos.">Store downtime can cost sales and customer confidence.</span></div>
       </div>
-      <p class="rail-footnote" data-en="TRAINING SCENARIOS / DEFENSIVE DECISIONS ONLY" data-af="OPLEIDINGSSCENARIO’S / SLEGS VERDEDIGENDE BESLUITE">TRAINING SCENARIOS / DEFENSIVE DECISIONS ONLY</p>
+      <p class="rail-footnote" data-en="SIMULATED SCENARIOS / RESULTS VARY BY BUSINESS" data-af="GESIMULEERDE SCENARIO’S / RESULTATE VERSKIL PER BESIGHEID">SIMULATED SCENARIOS / RESULTS VARY BY BUSINESS</p>
+      <a class="rail-cta" href="mailto:wraith.r7.cyber@gmail.com?subject=Website%20security%20assessment%20enquiry" data-en="Explore a real security assessment ↗" data-af="Ontdek ’n werklike sekuriteitsassessering ↗">Explore a real security assessment ↗</a>
     </aside>
   </main>
 
-  <script src="game.js" defer></script>
+  <script src="tycoon.js" defer></script>
 </body>
 </html>
