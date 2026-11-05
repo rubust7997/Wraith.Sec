@@ -4,11 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0d1110">
-  <meta name="description" content="Run a small online shop through simulated cyber incidents. Grow sales, invest in security, and see the financial impact of business disruptions.">
+  <meta name="description" content="Build an online shop through daily sales, stock buying, business costs, and simulated cyber threats that scale as your storefront grows.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://rubust7997.github.io/Wraith.Sec/cyber-game/">
   <meta property="og:title" content="Storefront Under Pressure | Wraith Security">
-  <meta property="og:description" content="Grow a small online store, handle incoming threat emails, and see how security incidents affect sales, cash flow, and customer trust.">
+  <meta property="og:description" content="Name your shop, stock products, run daily sales, and see simulated cyber incidents hit your cash flow as the business grows.">
   <meta property="og:image" content="https://rubust7997.github.io/Wraith.Sec/assets/wraith-security-logo.jpeg">
   <meta name="twitter:card" content="summary">
   <title>Storefront Under Pressure | Wraith Security</title>
@@ -17,6 +17,7 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="icon" href="../assets/wraith-security-logo.jpeg">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="gameplay.css">
 </head>
 <body>
   <div class="scanline" aria-hidden="true"></div>
@@ -27,6 +28,7 @@
     </a>
     <div class="topbar-right">
       <span class="edition"><span class="live-dot"></span><span data-en="SMALL BUSINESS / LIVE SIMULATION" data-af="KLEINBESIGHEID / LEWENDE SIMULASIE">SMALL BUSINESS / LIVE SIMULATION</span></span>
+      <button class="music-toggle" id="musicToggle" type="button" aria-label="Mute ambient music" aria-pressed="true" title="Toggle ambient music"><span aria-hidden="true">♫</span><small id="musicState">ON</small></button>
       <button class="language-button" id="languageToggle" type="button" aria-label="Switch to Afrikaans">AF</button>
     </div>
   </header>
@@ -43,19 +45,24 @@
         <div class="game-status">
           <div class="metrics-grid">
             <div class="metric"><span data-en="CASH BALANCE" data-af="KONTANTBALANS">CASH BALANCE</span><strong id="cashBalance">R 850</strong></div>
-            <div class="metric"><span data-en="SALES / SEC" data-af="VERKOPE / SEK">SALES / SEC</span><strong id="salesRate">R 8</strong></div>
             <div class="metric"><span data-en="CUSTOMER TRUST" data-af="KLIËNT vertroue">CUSTOMER TRUST</span><strong id="trustValue">100%</strong></div>
-            <div class="metric metric-clock"><span data-en="STORE OPEN" data-af="WINKEL OOP">STORE OPEN</span><strong id="dayTimer">00:00</strong></div>
+            <div class="metric metric-clock"><span data-en="DAY / TIME" data-af="DAG / TYD">DAY / TIME</span><strong id="dayTimer">DAY 01 · 09:00</strong></div>
+            <div class="metric metric-threat"><span data-en="THREAT PRESSURE" data-af="BEDREIGINGSDRUK">THREAT PRESSURE</span><strong id="threatPressure">LOW</strong></div>
           </div>
         </div>
 
         <div class="tycoon-grid">
           <div class="store-column">
             <section class="store-panel storefront-panel" aria-labelledby="storeTitle">
-              <div class="panel-heading"><div><p class="panel-kicker" data-en="YOUR BUSINESS" data-af="JOU BESIGHEID">YOUR BUSINESS</p><h2 id="storeTitle" data-en="Moss &amp; Mirth Supply" data-af="Moss &amp; Mirth Voorraad">Moss &amp; Mirth Supply</h2></div><span class="live-status"><i></i><span id="storeState">OPEN</span></span></div>
-              <div class="store-numbers"><div><span data-en="ORDERS TODAY" data-af="BESTELLINGS VANDAG">ORDERS TODAY</span><strong id="orderCount">0</strong></div><div><span data-en="GROSS SALES" data-af="BRUTO VERKOPE">GROSS SALES</span><strong id="grossSales">R 0</strong></div><div><span data-en="SERVICE STATUS" data-af="DIENSSTATUS">SERVICE STATUS</span><strong id="serviceStatus">ONLINE</strong></div></div>
+              <div class="panel-heading"><div><p class="panel-kicker" data-en="YOUR BUSINESS" data-af="JOU BESIGHEID">YOUR BUSINESS</p><h2 id="storeTitle">Your Shop</h2></div><span class="live-status"><i></i><span id="storeState">OPEN</span></span></div>
+              <div class="store-numbers"><div><span data-en="ORDERS TODAY" data-af="BESTELLINGS VANDAG">ORDERS TODAY</span><strong id="orderCount">0</strong></div><div><span data-en="SALES TODAY" data-af="VERKOPE VANDAG">SALES TODAY</span><strong id="grossSales">R 0</strong></div><div><span data-en="SERVICE STATUS" data-af="DIENSSTATUS">SERVICE STATUS</span><strong id="serviceStatus">ONLINE</strong></div></div>
               <div class="sales-track" aria-label="Store sales activity"><span id="salesPulse"></span></div>
               <p class="store-caption" id="storeCaption" data-en="The store is open. Incoming orders add to your balance over time." data-af="Die winkel is oop. Inkomende bestellings verhoog jou balans mettertyd.">The store is open. Incoming orders add to your balance over time.</p>
+            </section>
+
+            <section class="store-panel stock-panel" aria-labelledby="stockTitle">
+              <div class="panel-heading"><div><p class="panel-kicker" data-en="BUY STOCK / SELL ORDERS" data-af="KOOP VOORRAAD / VERKOOP BESTELLINGS">BUY STOCK / SELL ORDERS</p><h2 id="stockTitle" data-en="Products & inventory" data-af="Produkte en voorraad">Products &amp; inventory</h2></div><span class="stock-total" id="stockTotal">0 units</span></div>
+              <div class="item-grid" id="itemGrid"></div>
             </section>
 
             <section class="store-panel inbox-panel" aria-labelledby="inboxTitle">
@@ -76,7 +83,7 @@
             <p class="investment-note" data-en="In this simulation, upgrades change the size of some losses. They don't make a business risk-free." data-af="In hierdie simulasie verander opgraderings die grootte van sommige verliese. Dit maak ’n besigheid nie risikovry nie.">In this simulation, upgrades change the size of some losses. They don't make a business risk-free.</p>
           </section>
         </div>
-        <div class="game-controls"><span id="gameStatus" role="status" aria-live="polite" data-en="Sales are running. Incoming incidents are simulated." data-af="Verkope loop. Inkomende insidente is gesimuleer.">Sales are running. Incoming incidents are simulated.</span><button class="end-shift" id="endShiftButton" type="button" data-en="Close the books" data-af="Sluit die boeke">Close the books</button></div>
+        <div class="game-controls"><span id="gameStatus" role="status" aria-live="polite" data-en="Stock products, collect orders, and watch business risk rise with growth." data-af="Vul produkte aan, ontvang bestellings en kyk hoe besigheidsrisiko met groei toeneem.">Stock products, collect orders, and watch business risk rise with growth.</span><button class="end-shift" id="closeDayButton" type="button" data-en="Close shop early" data-af="Sluit winkel vroeg">Close shop early</button></div>
       </section>
 
       <section class="results" id="results" hidden aria-live="polite">
@@ -84,9 +91,9 @@
         <div class="result-top"><div><p class="result-score-label" data-en="ENDING BALANCE" data-af="EINDBALANS">ENDING BALANCE</p><p class="result-score"><span id="finalBalance">R 0</span></p></div><div class="result-rank" id="businessStatus"></div></div>
         <h2 id="resultTitle" tabindex="-1" data-en="Your business, under pressure." data-af="Jou besigheid, onder druk.">Your business, under pressure.</h2>
         <p class="result-message" id="resultMessage"></p>
-        <div class="report-grid"><div><span data-en="GROSS SALES" data-af="BRUTO VERKOPE">GROSS SALES</span><strong id="finalSales">R 0</strong></div><div><span data-en="INCIDENT LOSSES" data-af="INSIDENTVERLIESE">INCIDENT LOSSES</span><strong id="finalLosses">R 0</strong></div><div><span data-en="CUSTOMER TRUST" data-af="KLIËNTVERTROUE">CUSTOMER TRUST</span><strong id="finalTrust">100%</strong></div><div><span data-en="ORDERS COMPLETED" data-af="BESTELLINGS VOLTOOI">ORDERS COMPLETED</span><strong id="finalOrders">0</strong></div></div>
+        <div class="report-grid"><div><span data-en="GROSS SALES" data-af="BRUTO VERKOPE">GROSS SALES</span><strong id="finalSales">R 0</strong></div><div><span data-en="STOCK PURCHASES" data-af="VOORRAADAANKOPE">STOCK PURCHASES</span><strong id="finalStockCosts">R 0</strong></div><div><span data-en="OPERATING COSTS" data-af="BEDRYFSKOSTE">OPERATING COSTS</span><strong id="finalOperatingCosts">R 0</strong></div><div><span data-en="INCIDENT LOSSES" data-af="INSIDENTVERLIESE">INCIDENT LOSSES</span><strong id="finalLosses">R 0</strong></div><div><span data-en="CUSTOMER TRUST" data-af="KLIËNTVERTROUE">CUSTOMER TRUST</span><strong id="finalTrust">100%</strong></div><div><span data-en="ORDERS COMPLETED" data-af="BESTELLINGS VOLTOOI">ORDERS COMPLETED</span><strong id="finalOrders">0</strong></div></div>
         <div class="debrief" id="incidentReport"></div>
-        <div class="wraith-pitch"><p class="panel-kicker" data-en="FICTIONAL SIMULATION. REAL BUSINESSES FACE REAL COSTS." data-af="FIKTIEWE SIMULASIE. REGTE BESIGHEDE HET REGTE KOSTES.">FICTIONAL SIMULATION. REAL BUSINESSES FACE REAL COSTS.</p><h3 data-en="Don't guess where your exposure is." data-af="Moenie raai waar jou blootstelling lê nie.">Don't guess where your exposure is.</h3><p data-en="Wraith Security offers independent, authorised security assessments for websites and small businesses." data-af="Wraith Security bied onafhanklike, gemagtigde sekuriteitsassesserings vir webwerwe en klein besighede.">Wraith Security offers independent, authorised security assessments for websites and small businesses.</p><a class="button" href="mailto:wraith.r7.cyber@gmail.com?subject=Website%20security%20assessment%20enquiry"><span data-en="Ask Wraith Security" data-af="Vra Wraith Security">Ask Wraith Security</span><b aria-hidden="true">↗</b></a></div>
+        <div class="wraith-pitch"><p class="panel-kicker" data-en="FICTIONAL SIMULATION. REAL BUSINESSES FACE REAL COSTS." data-af="FIKTIEWE SIMULASIE. REGTE BESIGHEDE HET REGTE KOSTES.">FICTIONAL SIMULATION. REAL BUSINESSES FACE REAL COSTS.</p><h3 data-en="Don't guess where your exposure is." data-af="Moenie raai waar jou blootstelling lê nie.">Don't guess where your exposure is.</h3><p data-en="Wraith Security offers independent, authorised security assessments for websites and small businesses." data-af="Wraith Security bied onafhanklike, gemagtigde sekuriteitsassesserings vir webwerwe en klein besighede.">Wraith Security offers independent, authorised security assessments for websites and small businesses.</p><a class="button" href="../#contact"><span data-en="Explore Wraith Security services" data-af="Ontdek Wraith Security-dienste">Explore Wraith Security services</span><b aria-hidden="true">↗</b></a></div>
         <div class="result-actions">
           <button class="button" id="replayButton" type="button"><span data-en="Open another shop" data-af="Begin ’n nuwe winkel">Open another shop</span><b aria-hidden="true">↻</b></button>
           <button class="button button-secondary" id="shareButton" type="button"><span data-en="Share on Facebook" data-af="Deel op Facebook">Share on Facebook</span><b aria-hidden="true">↗</b></button>
@@ -95,19 +102,43 @@
         <p class="share-status" id="shareStatus" role="status" aria-live="polite"></p>
       </section>
 
+      <dialog class="welcome-dialog" id="welcomeDialog" aria-labelledby="welcomeTitle">
+        <div class="welcome-brand"><img src="../assets/wraith-security-logo.jpeg" alt=""><span>WRAITH <b>SECURITY</b></span></div>
+        <p class="panel-kicker" data-en="NEW BUSINESS / DAY 01" data-af="NUWE BESIGHEID / DAG 01">NEW BUSINESS / DAY 01</p>
+        <h2 id="welcomeTitle" data-en="Build your storefront." data-af="Bou jou winkel.">Build your storefront.</h2>
+        <p class="welcome-copy" data-en="Name your shop, stock products, and run it day by day. Customers place orders while the store is open. Buy inventory and business upgrades from your balance. At closing, operating costs come out. Simulated cyber incidents can interrupt sales, drain cash, and damage customer trust—and their impact scales as your business grows." data-af="Gee jou winkel ’n naam, vul produkte aan en bestuur dit dag vir dag. Kliënte plaas bestellings terwyl die winkel oop is. Koop voorraad en besigheidsopgraderings uit jou balans. Bedryfskoste word met sluiting afgetrek. Gesimuleerde kuberinsidente kan verkope onderbreek, kontant tap en kliëntevertroue skaad—en hul impak groei saam met jou besigheid.">Name your shop, stock products, and run it day by day. Customers place orders while the store is open. Buy inventory and business upgrades from your balance. At closing, operating costs come out. Simulated cyber incidents can interrupt sales, drain cash, and damage customer trust—and their impact scales as your business grows.</p>
+        <form id="welcomeForm" class="welcome-form">
+          <label for="businessNameInput" data-en="YOUR BUSINESS NAME" data-af="JOU BESIGHEIDSNAAM">YOUR BUSINESS NAME</label>
+          <input id="businessNameInput" name="businessName" maxlength="36" autocomplete="organization" required placeholder="e.g. Moss & Mirth Supply" data-en-placeholder="e.g. Moss & Mirth Supply" data-af-placeholder="bv. Moss & Mirth Voorraad">
+          <button class="button" type="submit"><span data-en="Open your shop" data-af="Maak jou winkel oop">Open your shop</span><b aria-hidden="true">→</b></button>
+        </form>
+        <p class="welcome-note" data-en="One accelerated business day lasts about a minute. Your business name stays in this browser session." data-af="Een versnelde besigheidsdag duur ongeveer ’n minuut. Jou besigheidsnaam bly in hierdie blaaiersessie.">One accelerated business day lasts about a minute. Your business name stays in this browser session.</p>
+      </dialog>
+
+      <dialog class="day-dialog" id="dayDialog" aria-labelledby="dayResultTitle">
+        <div class="incident-topline"><span class="live-dot"></span><span data-en="END OF BUSINESS DAY" data-af="EINDE VAN BESIGHEIDSDAG">END OF BUSINESS DAY</span><span id="closedDayLabel">DAY 01</span></div>
+        <p class="panel-kicker" data-en="DAILY CLOSEOUT" data-af="DAAGLIKSE SLUITING">DAILY CLOSEOUT</p>
+        <h2 id="dayResultTitle" tabindex="-1">Day 01 complete</h2>
+        <p class="day-result-copy" id="dayResultCopy"></p>
+        <div class="day-ledger" id="dayLedger"></div>
+        <p class="restock-reminder" data-en="Review your remaining stock before opening the next day." data-af="Gaan jou oorblywende voorraad na voordat jy die volgende dag oopmaak.">Review your remaining stock before opening the next day.</p>
+        <div class="day-actions"><button class="button" id="nextDayButton" type="button"><span data-en="Open next day" data-af="Maak volgende dag oop">Open next day</span><b aria-hidden="true">→</b></button><button class="end-shift" id="finishBusinessButton" type="button" data-en="Close business" data-af="Sluit besigheid">Close business</button></div>
+      </dialog>
+
       <dialog class="incident-dialog" id="incidentDialog" aria-labelledby="incidentTitle">
         <div class="incident-topline"><span class="incident-pulse"></span><span data-en="INCOMING EMAIL / BUSINESS INCIDENT" data-af="INKOMENDE E-POS / BESIGHEIDSINSIDENT">INCOMING EMAIL / BUSINESS INCIDENT</span><span id="incidentTime">00:00</span></div>
         <div class="incident-email"><span data-en="FROM" data-af="VAN">FROM</span><strong id="incidentSender"></strong><span data-en="SUBJECT" data-af="ONDERWERP">SUBJECT</span><strong id="incidentSubject"></strong></div>
         <p class="panel-kicker" id="incidentType"></p>
         <h2 id="incidentTitle"></h2>
         <p class="incident-story" id="incidentStory"></p>
-        <div class="incident-impact"><div><span data-en="CASH LOST" data-af="KONTANT VERLOOR">CASH LOST</span><strong id="incidentCashImpact">R 0</strong></div><div><span data-en="TRUST CHANGE" data-af="VERTROUEVERANDERING">TRUST CHANGE</span><strong id="incidentTrustImpact">-0%</strong></div><div><span data-en="STORE STATUS" data-af="WINKELSTATUS">STORE STATUS</span><strong id="incidentStoreImpact">OPEN</strong></div></div>
+        <div class="incident-impact"><div><span data-en="CASH LOST" data-af="KONTANT VERLOOR">CASH LOST</span><strong id="incidentCashImpact">R 0</strong></div><div><span data-en="TRUST CHANGE" data-af="VERTROUEVERANDERING">TRUST CHANGE</span><strong id="incidentTrustImpact">-0%</strong></div><div><span data-en="STORE STATUS" data-af="WINKELSTATUS">STORE STATUS</span><strong id="incidentStoreImpact">OPEN</strong></div><div><span data-en="THREAT SCALE" data-af="BEDREIGINGSKAAL">THREAT SCALE</span><strong id="incidentScale">LOW</strong></div></div>
         <p class="incident-explainer" id="incidentExplainer"></p>
         <button class="button incident-close" id="incidentContinue" type="button"><span data-en="Back to the store" data-af="Terug na die winkel">Back to the store</span><b aria-hidden="true">→</b></button>
       </dialog>
 
       <footer class="game-footer">
-        <span data-en="AWARENESS GAME · NO PERSONAL DATA COLLECTED" data-af="BEWUSMAKINGSPEL · GEEN PERSOONLIKE DATA WORD INGESAMEL NIE">AWARENESS GAME · NO PERSONAL DATA COLLECTED</span>
+        <span data-en="STORE TYCOON SIMULATION · INCIDENTS ARE FICTIONAL" data-af="WINKELSIMULASIE · INSIDENTE IS FIKTIEF">STORE TYCOON SIMULATION · INCIDENTS ARE FICTIONAL</span>
+        <span class="music-credit">♫ MOAVII · FOREIGN · FREETOUSE.COM</span>
         <a href="../" data-en="Wraith Security ↗" data-af="Wraith Security ↗">Wraith Security ↗</a>
       </footer>
     </section>
@@ -124,10 +155,11 @@
         <div><b>03</b><span data-en="Store downtime can cost sales and customer confidence." data-af="Winkelstilstand kan verkope en kliëntevertroue kos.">Store downtime can cost sales and customer confidence.</span></div>
       </div>
       <p class="rail-footnote" data-en="SIMULATED SCENARIOS / RESULTS VARY BY BUSINESS" data-af="GESIMULEERDE SCENARIO’S / RESULTATE VERSKIL PER BESIGHEID">SIMULATED SCENARIOS / RESULTS VARY BY BUSINESS</p>
-      <a class="rail-cta" href="mailto:wraith.r7.cyber@gmail.com?subject=Website%20security%20assessment%20enquiry" data-en="Explore a real security assessment ↗" data-af="Ontdek ’n werklike sekuriteitsassessering ↗">Explore a real security assessment ↗</a>
+      <a class="rail-cta" href="../#contact" data-en="Explore Wraith Security services ↗" data-af="Ontdek Wraith Security-dienste ↗">Explore Wraith Security services ↗</a>
     </aside>
   </main>
 
-  <script src="tycoon.js" defer></script>
+  <audio id="ambientMusic" loop preload="none" src="Moavii%20-%20Foreign%20(freetouse.com).mp3"></audio>
+  <script src="store.js" defer></script>
 </body>
 </html>
